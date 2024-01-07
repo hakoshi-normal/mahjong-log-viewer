@@ -5,8 +5,10 @@ import { calc_scores } from "./calc_scores.ts";
 import { check_tabledata } from "./check_tabledata.ts";
 import { generate_personal_scores } from "./data_formatter.ts";
 
-const supabaseUrl = 'https://pllbjkdwrjmidmzhuima.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsbGJqa2R3cmptaWRtemh1aW1hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NTQ3MTgsImV4cCI6MjAxODAzMDcxOH0.gYNunmqvear27Ta-NJTNEHR6T2kd1_xql5-Fvxw-nuY'
+
+const supabaseUrl  = Deno.env.get("SUPABASE_URL");
+const supabaseKey = Deno.env.get("SUPABASE_KEY");
+
 
 var tabledata: any[] = [];
 var tmp_tabledata: any[] = [];
