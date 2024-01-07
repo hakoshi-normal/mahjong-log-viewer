@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link id="original_stylesheet" href="styles/style_dark.css" rel="stylesheet" />
+    <link id="tabulator_stylesheet" href="https://unpkg.com/tabulator-tables/dist/css/tabulator_midnight.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js "></script>
+    <script type="text/javascript" src="logeditor.js"></script>
+
+</head>
+<body>
+    <div id="config">
+        <div>ダークモード
+            <input id="darkmode" type="checkbox" onchange="change_color()">
+          </div>
+    </div>
+    <div id="table"></div>
+    <button onclick="data_save()">save & exit</button>
+    <button onclick="location.href='./index.html'">exit</button>
+    <button onclick="data_add()">add log</button>
+</body>
+</html>

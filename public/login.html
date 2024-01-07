@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <link id="original_stylesheet" href="styles/style_dark.css" rel="stylesheet" />
+    <script type="text/javascript">
+        async function login(){
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+            const jsonData = JSON.parse(await response.text());
+            if (jsonData.result){
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                location.href = './index.html';
+            } else {
+                document.getElementById("password").value = "";
+                alert("ユーザー名またはパスワードが間違っています");
+            }
+        }
+
+        async function register(){
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            const response = await fetch("/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+            const jsonData = JSON.parse(await response.text());
+            if (jsonData.result){
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                location.href = './index.html';
+            } else {
+                document.getElementById("password").value = "";
+                alert("入力事項に不備があります");
+            }
+        }
+
+        function change_color() {
+            if (document.getElementById("darkmode").checked) {
+                localStorage.setItem("color", 'dark');
+                document.getElementById("original_stylesheet").href = "styles/style_dark.css";
+            } else {
+                localStorage.setItem("color", 'light');
+                document.getElementById("original_stylesheet").href = "styles/style_light.css";
+            }
+        }
+
+        // HTML読み込み時にカラーモードを反映
+        window.onload = async function () {
+            var color = localStorage.getItem("color");
+            console.log(color);
+            if (color == null){
+                color = 'dark';
+                localStorage.setItem("color", color);
+            }
+            if (color == 'dark'){
+                document.getElementById('darkmode').checked = true;
+            } else {
+                document.getElementById('darkmode').checked = false;
+            }
+            change_color();
+        }
+
+    </script>
+</head>
+<body>
+    <div id="config">
+        <div>ダークモード
+            <input id="darkmode" type="checkbox" onchange="change_color()">
+          </div>
+        <div class="login_form_btm">
+            <div>username: <input id="username"></div>
+            <div>password: <input id="password" type="password"></div>
+        </div>
+        <button onclick="register()">ユーザ登録</button>
+        <button onclick="login()">ログイン</button>
+    </div>
+
+</body>
+</html>
